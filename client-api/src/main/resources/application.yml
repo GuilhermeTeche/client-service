@@ -1,0 +1,50 @@
+app:
+  title: '@name@'
+  description: '@description@ -- DEFAULT --'
+  version: '@version@'
+
+server:
+  port: 9191
+
+spring:
+  jackson:
+    parser:
+      allow-numeric-leading-zeros: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+  datasource:
+    url: jdbc:h2:~/test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+# change health check status code
+management:
+  endpoint:
+    health:
+      status:
+        http-mapping:
+          DOWN: 500
+          UP: 200
+
+#Headers - CreditRecoveryBridge
+creditrecoverybridgeheader:
+  clientId: f694f466-1a16-4227-bacf-e914391ccb4f
+  clientSecret: aO5dO4nR8oB1qH8aX7dH3rC4jT1cJ7nP8dQ1aF3dT0sW5gD3xP
+  usernameBasicAuth: f694f466-1a16-4227-bacf-e914391ccb4f
+  passwordBasicAuth: aO5dO4nR8oB1qH8aX7dH3rC4jT1cJ7nP8dQ1aF3dT0sW5gD3xP
+
+#CreditRecoveryBridge Connect - OAuth provider
+creditrecoderybridgeoauth:
+  hostname: http://localhost:9292/keys/getPublicKey
+
+#CreditRecoveryBridge Connect - transaction
+creditrecoderybridgetransaction:
+  hostname: http://localhost:9292/security/create
